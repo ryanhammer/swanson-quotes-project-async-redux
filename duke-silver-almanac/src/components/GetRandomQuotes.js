@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, Typography, Button, Container, TextField, makeStyles } from '@material-ui/core';
 import { connect } from 'react-redux';
-import { getQuotes, addQuotes } from '../actions';
+import { getQuotes, addQuotes, resetQuotes } from '../actions';
 
 const useStyles = makeStyles({
   addButtonBox: {
@@ -29,6 +29,10 @@ const useStyles = makeStyles({
   },
   figCaption: {
     textAlign: 'center'
+  },
+  resetBtnBox: {
+    textAlign: 'center',
+    marginBottom: '5rem'
   }
 });
 
@@ -81,23 +85,34 @@ const GetRandomQuotes = (props) => {
         
       </Container>
       {props.quotes.length && (
-        <Container className={ classes.randomQuoteContainer }> 
-          <Box className={ classes.randomQuoteBox }>
-            { props.quotes.map(item => (
-              <Typography key={ item }>{ item }</Typography>
-            ))}
+        <Box>
+          <Container className={ classes.randomQuoteContainer }> 
+            <Box className={ classes.randomQuoteBox }>
+              { props.quotes.map(item => (
+                <Typography key={ item }>{ item }</Typography>
+              ))}
+            </Box>
+            <figure>
+              <img
+                src={ require('../assets/swanson1.jpg').default }
+                alt={'Ron Swanson'}
+                className={ classes.randomRonImage }
+              />
+              <figcaption className={ classes.figCaption }>
+                Ron Swanson
+              </figcaption>
+            </figure>
+          </Container>
+          <Box className={classes.resetBtnBox}>
+            <Button 
+              variant='contained'
+              color='primary'
+              onClick={() => props.resetQuotes()}
+            >
+              Reset Quote Getter
+            </Button>
           </Box>
-          <figure>
-            <img
-              src={ require('../assets/swanson1.jpg').default }
-              alt={'Ron Swanson'}
-              className={ classes.randomRonImage }
-            />
-            <figcaption className={ classes.figCaption }>
-              Ron Swanson
-            </figcaption>
-          </figure>
-        </Container>
+        </Box>
       )}
     </>
   )
@@ -111,4 +126,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps, { getQuotes, addQuotes })(GetRandomQuotes);
+export default connect(mapStateToProps, { getQuotes, addQuotes, resetQuotes })(GetRandomQuotes);

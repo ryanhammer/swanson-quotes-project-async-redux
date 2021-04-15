@@ -22,7 +22,7 @@ export const addQuotes = (value) => {
   return { type: ADD_QUOTES, payload: value }
 };
 
-// export const REMOVE_FEATURE = "REMOVE_FEATURE";
-// export const removeFeature = (feature) => {
-//   return { type: REMOVE_FEATURE, payload: feature};
-// };
+export const RESET_QUOTES = "RESET_QUOTES";
+export const resetQuotes = () => {
+  return { type: RESET_QUOTES };
+};

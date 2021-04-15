@@ -1,4 +1,4 @@
-import { GET_QUOTES_START, GET_QUOTES_SUCCESS, GET_QUOTES_FAILURE, ADD_QUOTES } from '../actions';
+import { GET_QUOTES_START, GET_QUOTES_SUCCESS, GET_QUOTES_FAILURE, ADD_QUOTES, RESET_QUOTES } from '../actions';
 
 const initialState = {
   requestNum: '',
@@ -34,6 +34,12 @@ export const reducer = (state=initialState, action) => {
         ...state,
         requestNum: action.payload
       };
+    case RESET_QUOTES:
+      return {
+        ...state,
+        requestNum: '',
+        quotes: []
+      }
     default:
       return state;
   }
