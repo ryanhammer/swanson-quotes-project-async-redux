@@ -1,7 +1,7 @@
-import { GET_QUOTES_START, GET_QUOTES_SUCCESS, GET_QUOTES_FAILURE } from '../actions';
+import { GET_QUOTES_START, GET_QUOTES_SUCCESS, GET_QUOTES_FAILURE, ADD_QUOTES } from '../actions';
 
 const initialState = {
-  requestNum: '1',
+  requestNum: '',
   apiURL: 'https://ron-swanson-quotes.herokuapp.com/v2/quotes/',
   quotes: [],
   error: '',
@@ -16,17 +16,23 @@ export const reducer = (state=initialState, action) => {
         error: '',
         isGetting: true
       };
-      case GET_QUOTES_SUCCESS:
+    case GET_QUOTES_SUCCESS:
       return {
         ...state,
         quotes: action.payload,
         isGetting: false
       };
-      case GET_QUOTES_FAILURE:
+    case GET_QUOTES_FAILURE:
       return {
         ...state,
         error: action.payload,
         isGetting: false
+      };
+    case ADD_QUOTES:
+      console.log('hello from addQuotes')
+      return {
+        ...state,
+        requestNum: action.payload
       };
     default:
       return state;

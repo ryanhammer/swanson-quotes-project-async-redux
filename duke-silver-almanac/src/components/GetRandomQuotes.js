@@ -1,11 +1,13 @@
 import React from 'react';
 import { Box, Typography, Button, Container, TextField, makeStyles } from '@material-ui/core';
 import { connect } from 'react-redux';
-import { getQuotes } from '../actions';
+import { getQuotes, addQuotes } from '../actions';
 
 const useStyles = makeStyles({
-  appBarMarg: {
-    marginBottom: '1rem'
+  addButtonBox: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-evenly'
   },
   getQuoteContainer: {
     display: `flex`,
@@ -41,45 +43,59 @@ const GetRandomQuotes = (props) => {
         maxWidth='md'
         className={classes.getQuoteContainer}
       >
-        <Box>
+        <Box className={classes.addButtonBox}>
           <Typography variant='body1' gutterBottom={true}>
             Click below for random Swanson-isms!
           </Typography>
-          <Button 
-            variant='contained'
-            color='primary'
-            onClick={() => props.getQuotes(`${props.apiURL}${props.requestNum}`)}
-          >
-            Get Quotes
-          </Button>
-        </Box>
-        <Box>
+          <Box>
+            <Button 
+              variant='contained'
+              color='primary'
+              onClick={() => props.getQuotes(`${props.apiURL}${props.requestNum}`)}
+            >
+              Get Quotes
+            </Button>
+          </Box>
 
         </Box>
-        <TextField
+        <Box>
+          <Typography variant='body1' gutterBottom={true}>
+              Add more (up to 10)!
+          </Typography>
+          <TextField
             id="outlined-number"
-            label="Add Quotes"
+            label="Add"
             type="number"
+            InputProps={{ inputProps: { min: 1, max: 10, }
+            }}
+            size='medium'
             InputLabelProps={{
               shrink: true,
             }}
             variant="outlined"
+            onChange={(event) => props.addQuotes(event.target.value) }
+            value={ props.requestNum }
           />
+          
+        </Box>
+        
       </Container>
       {props.quotes.length && (
-        <Container className={classes.randomQuoteContainer}> 
-          <Box className={classes.randomQuoteBox}>
-            {props.quotes.map(item => (
-              <Typography key={item.id}>{item}</Typography>
+        <Container className={ classes.randomQuoteContainer }> 
+          <Box className={ classes.randomQuoteBox }>
+            { props.quotes.map(item => (
+              <Typography key={ item }>{ item }</Typography>
             ))}
           </Box>
           <figure>
             <img
               src={ require('../assets/swanson1.jpg').default }
               alt={'Ron Swanson'}
-              className={classes.randomRonImage}
+              className={ classes.randomRonImage }
             />
-            <figcaption className={classes.figCaption}>Ron Swanson</figcaption>
+            <figcaption className={ classes.figCaption }>
+              Ron Swanson
+            </figcaption>
           </figure>
         </Container>
       )}
@@ -95,4 +111,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps, { getQuotes })(GetRandomQuotes);
+export default connect(mapStateToProps, { getQuotes, addQuotes })(GetRandomQuotes);
