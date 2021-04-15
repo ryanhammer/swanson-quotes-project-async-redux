@@ -1,16 +1,38 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { AppBar, Toolbar, Typography } from '@material-ui/core';
+import { Link as RouterLink} from 'react-router-dom';
+import { AppBar, Toolbar, Typography, Link, makeStyles } from '@material-ui/core';
+
+const useStyles = makeStyles({
+  navDisplayFlex: {
+    display: `flex`,
+    justifyContent: `space-evenly`
+  },
+  linkText: {
+    textDecoration: `none`,
+    textTransform: `uppercase`,
+    color: `white`
+  }
+});
 
 export default function Header() {
+
+  const classes = useStyles();
   return (
     <AppBar position='relative'>
-      <Toolbar display='flex' alignItems='center'>
-        <Link to='/'>
-          <Typography variant='h6'>Home</Typography>
+      <Toolbar className={classes.navDisplayFlex}>
+        <Link
+          component={ RouterLink }
+          to='/' color='secondary'
+          className={classes.linkText}
+        >
+          Home
         </Link>
-        <Link to='/about'>
-          <Typography variant='h6'>About Ron</Typography>
+        <Link 
+          component={ RouterLink }
+          to='/about' color='secondary'
+          className={classes.linkText}
+        >
+          About Ron
         </Link>
       </Toolbar>
     </AppBar>

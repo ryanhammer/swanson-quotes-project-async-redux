@@ -1,6 +1,7 @@
 import React from 'react';
-import { Box, Typography, Button, Container } from '@material-ui/core';
+import { Box, Typography, Button, Container, TextField } from '@material-ui/core';
 import { connect } from 'react-redux';
+import { getQuotes } from '../actions';
 
 const GetRandomQuotes = (props) => {
   return (
@@ -10,11 +11,19 @@ const GetRandomQuotes = (props) => {
           <Typography variant='body1'>
             Click below for random Swanson-isms!
           </Typography>
-
         </Box>
         <Box>
-          <Button variant='contained' color='primary'>Get Quotes</Button>
+          <Button variant='contained' color='primary' onClick={() => props.getQuotes(`${props.apiURL}${props.requestNum}`)}>Get Quotes</Button>
         </Box>
+        <TextField
+            id="outlined-number"
+            label="Number"
+            type="number"
+            InputLabelProps={{
+              shrink: true,
+            }}
+            variant="outlined"
+          />
       </Container>
       {props.quotes.length && (
         <Container> 
@@ -35,8 +44,10 @@ const GetRandomQuotes = (props) => {
 
 const mapStateToProps = (state) => {
   return {
+    apiURL: state.apiURL,
+    requestNum: state.requestNum,
     quotes: state.quotes
   }
 }
 
-export default connect(mapStateToProps, {})(GetRandomQuotes);
+export default connect(mapStateToProps, { getQuotes })(GetRandomQuotes);
