@@ -1,11 +1,13 @@
-import { GET_QUOTES_START, GET_QUOTES_SUCCESS, GET_QUOTES_FAILURE, ADD_QUOTES, RESET_QUOTES } from '../actions';
+import { GET_QUOTES_START, GET_QUOTES_SUCCESS, GET_QUOTES_FAILURE, ADD_QUOTES, SEARCH_QUOTES, CHANGE_FEATURE, RESET_QUOTES } from '../actions';
 
 const initialState = {
   requestNum: '',
   apiURL: 'https://ron-swanson-quotes.herokuapp.com/v2/quotes/',
   quotes: [],
   error: '',
-  isGetting: false
+  isGetting: false,
+  searchValue: '',
+  searchFeature: false
 };
 
 export const reducer = (state=initialState, action) => {
@@ -29,15 +31,25 @@ export const reducer = (state=initialState, action) => {
         isGetting: false
       };
     case ADD_QUOTES:
-      console.log('hello from addQuotes')
       return {
         ...state,
         requestNum: action.payload
+      };
+    case SEARCH_QUOTES:
+      return {
+        ...state,
+        searchValue: action.payload
+      };
+    case CHANGE_FEATURE:
+      return { 
+        ...state,
+        searchFeature: !action.payload
       };
     case RESET_QUOTES:
       return {
         ...state,
         requestNum: '',
+        searchValue: '',
         quotes: []
       }
     default:

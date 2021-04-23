@@ -1,9 +1,11 @@
 import React from 'react';
 import { Container, Typography } from '@material-ui/core';
+import { connect } from 'react-redux';
 
 import GetRandomQuotes from './GetRandomQuotes';
+import FindQuotes from './FindQuotes';
 
-export default function Home() {
+const Home = (props) => {
   return (
     <>
       <Container maxWidth='lg'>
@@ -14,7 +16,17 @@ export default function Home() {
           Enjoyable aphorisms from everyone's favorite mustachioed libertarian public servant
         </Typography>
       </Container>
-      <GetRandomQuotes/>
+      { props.searchFeature ? <FindQuotes /> : <GetRandomQuotes/> }
+      
     </>
   )
 }
+
+const mapStateToProps = (state) => {
+  return {
+    searchFeature: state.searchFeature,
+  }
+}
+
+export default connect(mapStateToProps, { })(Home);
+
