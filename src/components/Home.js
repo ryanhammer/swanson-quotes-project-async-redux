@@ -7,7 +7,7 @@ import FindQuotes from './FindQuotes';
 
 const Home = (props) => {
   return (
-    <>
+    <div>
       <Container maxWidth='lg'>
         <Typography align='center' variant='h1' gutterBottom={true}>
           Duke Silver's Almanac
@@ -18,7 +18,7 @@ const Home = (props) => {
       </Container>
       { props.searchFeature ? <FindQuotes /> : <GetRandomQuotes/> }
       
-    </>
+    </div>
   )
 }
 

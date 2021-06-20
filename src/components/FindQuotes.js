@@ -2,6 +2,7 @@ import React from 'react';
 import { Box, Typography, Button, Container, TextField, makeStyles } from '@material-ui/core';
 import { connect } from 'react-redux';
 import { getQuotes, searchQuotes, resetQuotes, changeFeature } from '../actions';
+import swanson_image_2 from '../assets/swanson2.jpg'
 
 const useStyles = makeStyles({
   searchQuotesBox: {
@@ -49,7 +50,7 @@ const FindQuotes = (props) => {
   let isQuotes = props.quotes.length > 0;
 
   return (
-    <>
+    <div>
       <Container
         align='center'
         maxWidth='md'
@@ -110,7 +111,7 @@ const FindQuotes = (props) => {
             </Box>
             <figure>
               <img
-                src={ require('../assets/swanson2.jpg').default }
+                src={ swanson_image_2 }
                 alt={'Ron Swanson'}
                 className={ classes.findRonImage }
               />
@@ -130,7 +131,7 @@ const FindQuotes = (props) => {
           </Box>
         </Box>
       )}
-    </>
+    </div>
   )
 }
 

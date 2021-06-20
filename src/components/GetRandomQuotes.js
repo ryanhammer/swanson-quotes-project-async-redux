@@ -2,6 +2,7 @@ import React from 'react';
 import { Box, Typography, Button, Container, TextField, makeStyles } from '@material-ui/core';
 import { connect } from 'react-redux';
 import { getQuotes, addQuotes, resetQuotes, changeFeature } from '../actions';
+import swanson_image from '../assets/swanson1.jpg';
 
 const useStyles = makeStyles({
   addQuotesBox: {
@@ -50,7 +51,7 @@ const GetRandomQuotes = (props) => {
 
   console.log(isQuotes);
   return (
-    <>
+    <div>
       <Container
         align='center'
         maxWidth='md'
@@ -60,7 +61,7 @@ const GetRandomQuotes = (props) => {
           <Typography variant='body1' gutterBottom={true}>
             Click below for random Swanson-isms!
           </Typography>
-          <Box className={classes.buttonBox}>
+          <Box>
             <Button 
               variant='contained'
               color='primary'
@@ -116,7 +117,7 @@ const GetRandomQuotes = (props) => {
               </Box>
               <figure>
                 <img
-                  src={ require('../assets/swanson1.jpg').default }
+                  src={ swanson_image }
                   alt={'Ron Swanson'}
                   className={ classes.randomRonImage }
                 />
@@ -137,7 +138,7 @@ const GetRandomQuotes = (props) => {
           </Box>
         )}
       </div>
-    </>
+    </div>
   )
 }
 
